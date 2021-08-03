@@ -7,34 +7,34 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Test;
 
 public class LeilaoTest {
-	
-	@Test
+
+    @Test
     public void deveReceberUmLance() {
         Leilao leilao = new Leilao("Macbook Pro 15");
         assertEquals(0, leilao.getLances().size());
 
         BigDecimal doisMil = new BigDecimal("2000.0");
-		leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
+        leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
 
         assertEquals(1, leilao.getLances().size());
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
     }
-	
-	@Test
+
+    @Test
     public void naoDeveAceitarUmLanceIgualAoAnterior() {
         Leilao leilao = new Leilao("Macbook Pro 15");
         assertEquals(0, leilao.getLances().size());
 
         BigDecimal doisMil = new BigDecimal("2000.0");
-		leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
-		leilao.propoe(new Lance(new Usuario("Bill Gates"), doisMil));
+        leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
+        leilao.propoe(new Lance(new Usuario("Bill Gates"), doisMil));
 
         assertEquals(1, leilao.getLances().size());
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
     }
-	
-	
-	@Test
+
+
+    @Test
     public void naoDeveAceitarUmLanceMenorAoAnterior() {
         Leilao leilao = new Leilao("Macbook Pro 15");
         assertEquals(0, leilao.getLances().size());
@@ -42,19 +42,19 @@ public class LeilaoTest {
         BigDecimal doisMil = new BigDecimal("2000.0");
         BigDecimal quaseDoisMil = new BigDecimal("1999.9");
 
-		leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
-		leilao.propoe(new Lance(new Usuario("Bill Gates"), quaseDoisMil));
+        leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
+        leilao.propoe(new Lance(new Usuario("Bill Gates"), quaseDoisMil));
 
         assertEquals(1, leilao.getLances().size());
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
     }
-	
+
     @Test
     public void deveReceberVariosLances() {
-    	
-    	BigDecimal doisMil = new BigDecimal("2000.0");
-    	BigDecimal tresMil = new BigDecimal("3000.0");
-    	
+
+        BigDecimal doisMil = new BigDecimal("2000.0");
+        BigDecimal tresMil = new BigDecimal("3000.0");
+
         Leilao leilao = new Leilao("Macbook Pro 15");
         leilao.propoe(new Lance(new Usuario("Steve Jobs"), doisMil));
         leilao.propoe(new Lance(new Usuario("Steve Wozniak"), tresMil));
@@ -63,12 +63,12 @@ public class LeilaoTest {
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
         assertEquals(tresMil, leilao.getLances().get(1).getValor());
     }
-    
+
     @Test
     public void naoDeveAceitarDoisLancesSeguidosDoMesmoUsuario() {
-    	BigDecimal doisMil = new BigDecimal("2000.0");
-    	BigDecimal tresMil = new BigDecimal("3000.0");
-    	
+        BigDecimal doisMil = new BigDecimal("2000.0");
+        BigDecimal tresMil = new BigDecimal("3000.0");
+
         Leilao leilao = new Leilao("Macbook Pro 15");
         Usuario steveJobs = new Usuario("Steve Jobs");
 
@@ -78,7 +78,7 @@ public class LeilaoTest {
         assertEquals(1, leilao.getLances().size());
         assertEquals(doisMil, leilao.getLances().get(0).getValor());
     }
-    
+
     @Test
     public void naoDeveAceitarMaisDoQue5LancesDeUmMesmoUsuario() {
         Leilao leilao = new Leilao("Macbook Pro 15");
